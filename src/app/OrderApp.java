@@ -1,30 +1,26 @@
 package app;
 
-import appConfigurer.AppConfigurer;
+import product.Fruit;
 import repository.ProductRepository;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 
 public class OrderApp {
 
-    private ProductRepository productRepository;
-    private Menu menu;
-    private Cart cart;
-    private Order order;
-
-    public OrderApp(ProductRepository productRepository, Menu menu, Cart cart, Order order) {
-        this.productRepository = productRepository;
-        this.menu = menu;
-        this.cart = cart;
-        this.order = order;
-    }
-
     public void start(){
 
+        ProductRepository productRepository = new ProductRepository();
+        ArrayList<Fruit> products = productRepository.getFruits();
+        Menu menu = new Menu(products);
+        Scanner scanner = new Scanner(System.in);
+        Cart cart = new Cart(productRepository, menu);
 
         System.out.println(" 🍽️ fruit basket 🍽️ ");
-        Scanner scanner = new Scanner(System.in);
+
+        Order order = new Order(cart);
+
 
         while (true) {
             menu.printMenu();

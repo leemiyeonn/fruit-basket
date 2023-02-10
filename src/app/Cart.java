@@ -1,6 +1,5 @@
 package app;
 
-import appConfigurer.AppConfigurer;
 import product.Apple;
 import product.Fruit;
 import product.Grape;
@@ -18,9 +17,18 @@ public class Cart {
     private ArrayList<Fruit> items = new ArrayList<>();
     Iterator<Fruit> iterator = items.iterator();
 
-    AppConfigurer appConfigurer = new AppConfigurer();
+    private ProductRepository productRepository;
 
-    ProductRepository productRepository = appConfigurer.productRepository();
+    public Cart(ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }
+
+    private Menu menu;
+
+    public Cart(ProductRepository productRepository, Menu menu) {
+        this.productRepository = productRepository;
+        this.menu = menu;
+    }
 
     public void addToCart(int productId) {
 
